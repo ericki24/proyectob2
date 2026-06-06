@@ -1,20 +1,28 @@
 import psycopg2
 
-# Configuración de la conexión a PostgreSQL
-DB_CONFIG = {
-    "dbname": "banco_distribuido",
-    "user": "postgres",       # <--- Cambia esto por tu usuario de pgAdmin
-    "password": "432q",       # <--- Cambia esto por tu contraseña de pgAdmin
-    "host": "localhost",
-    "port": "5432"
-}
+
+import os
+
+# Leer las credenciales desde las variables de entorno del sistema
+DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_NAME = os.getenv("DB_NAME", "banco_distribuido")
+DB_USER = os.getenv("DB_USER", "postgres")
+DB_PASSWORD = os.getenv("DB_PASSWORD", "tu_contraseña_aquí")  # Esta será tu contraseña por defecto en local
 
 def conectar_db():
     try:
-        return psycopg2.connect(**DB_CONFIG)
+        conexion = psycopg2.connect(
+            host=DB_HOST,
+            database=DB_NAME,
+            user=DB_USER,
+            password=DB_PASSWORD
+        )
+        return conexion
     except Exception as e:
-        print(f"❌ Error al conectar a la base de datos: {e}")
+        print(f"Error al conectar a la base de datos: {e}")
         return None
+    
+
 
 def registrar_cliente_y_cuenta():
     print("\n--- 📝 APERTURA DE CUENTA (Tx 1) ---")
