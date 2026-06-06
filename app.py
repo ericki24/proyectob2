@@ -7,7 +7,7 @@ import os
 DB_HOST = os.getenv("DB_HOST", "localhost")
 DB_NAME = os.getenv("DB_NAME", "banco_distribuido")
 DB_USER = os.getenv("DB_USER", "postgres")
-DB_PASSWORD = os.getenv("DB_PASSWORD", "tu_contraseña_aquí")  # Esta será tu contraseña por defecto en local
+DB_PASSWORD = os.getenv("DB_PASSWORD", "contraseña_aquí")  
 
 def conectar_db():
     try:
